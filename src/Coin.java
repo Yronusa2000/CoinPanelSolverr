@@ -14,7 +14,7 @@ public class Coin {
         SILVER
     }
 
-    STATE state;
+    public STATE state;
 
 
     public Coin(STATE state) {
@@ -45,4 +45,12 @@ public class Coin {
     public void display(){
         System.out.print(this.toString());
     }
+
+    public Coin.STATE getState(){
+        return this.state;
+    }
+    public boolean equals(Coin c){
+        return this.state == c.state;
+    }
+
 }

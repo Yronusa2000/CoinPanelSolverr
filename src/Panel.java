@@ -28,7 +28,7 @@ public class Panel {
     Coin c2;
     Coin c3;
 
-    Panel.OPERATION[] opArray = new Panel.OPERATION[]{
+    static Panel.OPERATION[] opArray = new Panel.OPERATION[]{
             Panel.OPERATION.L1,
             Panel.OPERATION.L2,
             Panel.OPERATION.L3,
@@ -42,8 +42,9 @@ public class Panel {
 
     };
 
-    List<Panel.OPERATION> op = Arrays.asList(opArray);
-    public final List<List<Panel.OPERATION>> allSubsetOfOperations = Main.subsets(op);
+    static List<Panel.OPERATION> op = Arrays.asList(opArray);
+    public static final List<List<Panel.OPERATION>> allSubsetOfOperations = Main.subsets(op);
+
 
     public Panel(Coin a1, Coin a2, Coin a3, Coin b1, Coin b2, Coin b3, Coin c1, Coin c2, Coin c3) {
 
@@ -114,13 +115,28 @@ public class Panel {
     }
 
     public boolean isComplete(){
+
+        Panel completeGoldPanel = new Panel(
+                new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.GOLD),
+                new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.GOLD),new Coin(Coin.STATE.GOLD),
+                new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.GOLD));
+
+        Panel completeSilverPanel = new Panel(
+                new Coin(Coin.STATE.SILVER), new Coin(Coin.STATE.SILVER),new Coin(Coin.STATE.SILVER),
+                new Coin(Coin.STATE.SILVER), new Coin(Coin.STATE.SILVER),new Coin(Coin.STATE.SILVER),
+                new Coin(Coin.STATE.SILVER), new Coin(Coin.STATE.SILVER), new Coin(Coin.STATE.SILVER));
+
+        return (this.equals(completeGoldPanel) || this.equals(completeSilverPanel));
+    }
+
+    public boolean equals(Panel save){
         List<Coin> coins = this.getCoins();
-        for(Coin c : coins){
-            for(Coin d : coins){
-                if(c.state != d.state){
-                    return false;
-                }
+        List<Coin> coins2 = save.getCoins();
+        for(int i = 0; i < coins.toArray().length; i++){
+            if(!coins.get(i).equals(coins2.get(i))){
+                return false;
             }
+
         }
 
         return true;
@@ -159,9 +175,9 @@ public class Panel {
         this.c2.flip();
     }
     public void col3(){
-        this.c3.flip();
-        this.b3.flip();
         this.a3.flip();
+        this.b3.flip();
+        this.c3.flip();
     }
 
     public void diag1(){
@@ -187,9 +203,10 @@ public class Panel {
         Panel save = this;
 
         for(List<Panel.OPERATION> operationSubset : allSubsetOfOperations){
+
             this.operate(operationSubset);
+
             if(this.isComplete()){
-                this.display();
                 System.out.println("SOLVABLE !!!");
                 System.out.println(operationSubset);
                 return operationSubset;
@@ -207,16 +224,16 @@ public class Panel {
 
     private void set(Panel save) {
 
-        this.a1 = save.a1;
-        this.a2 = save.a2;
-        this.a3 = save.a3;
+        this.a1.state = save.a1.getState();
+        this.a2.state = save.a2.getState();
+        this.a3.state = save.a3.getState();
 
-        this.b1 = save.b1;
-        this.b2 = save.b2;
-        this.b3 = save.b3;
+        this.b1.state = save.b1.getState();
+        this.b2.state = save.b2.getState();
+        this.b3.state = save.b3.getState();
 
-        this.c1 = save.c1;
-        this.c2 = save.c2;
-        this.c3 = save.c3;
+        this.c1.state = save.c1.getState();
+        this.c2.state = save.c2.getState();
+        this.c3.state = save.c3.getState();
     }
 }

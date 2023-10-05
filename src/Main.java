@@ -8,23 +8,22 @@ public class Main {
 
 
 
-        Panel completePanel = new Panel(
-                new Coin(Coin.STATE.SILVER), new Coin(Coin.STATE.SILVER),new Coin(Coin.STATE.SILVER),
+        Panel cas1 = new Panel(
                 new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.GOLD),new Coin(Coin.STATE.GOLD),
+
+                new Coin(Coin.STATE.SILVER), new Coin(Coin.STATE.SILVER),new Coin(Coin.STATE.SILVER),
+
                 new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.GOLD));
 
         Panel panelToSolve = new Panel(
-                new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.SILVER),new Coin(Coin.STATE.SILVER),
-                new Coin(Coin.STATE.SILVER), new Coin(Coin.STATE.SILVER),new Coin(Coin.STATE.GOLD),
-                new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.SILVER));
-
-        Panel panelToSolve_SAVE = new Panel(
-                new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.SILVER),new Coin(Coin.STATE.SILVER),
-                new Coin(Coin.STATE.SILVER), new Coin(Coin.STATE.SILVER),new Coin(Coin.STATE.GOLD),
+                new Coin(Coin.STATE.SILVER), new Coin(Coin.STATE.GOLD),new Coin(Coin.STATE.GOLD),
+                new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.SILVER),new Coin(Coin.STATE.GOLD),
                 new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.GOLD), new Coin(Coin.STATE.SILVER));
 
        panelToSolve.isSolvable();
-       completePanel.isSolvable();
+       cas1.isSolvable();
+
+       System.out.println(Panel.allSubsetOfOperations);
     }
 
     public static void calcSubset(List<Panel.OPERATION> A, List<List<Panel.OPERATION>> res, List<Panel.OPERATION> subset, int index) {
